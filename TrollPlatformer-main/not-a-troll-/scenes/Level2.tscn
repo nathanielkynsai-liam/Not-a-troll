@@ -1,0 +1,137 @@
+[gd_scene load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://scripts/level_2.gd" id="1_lvl2"]
+[ext_resource type="PackedScene" path="res://scenes/player.tscn" id="2_player"]
+[ext_resource type="PackedScene" path="res://scenes/exit_door.tscn" id="3_exit"]
+[ext_resource type="PackedScene" path="res://scenes/stalactite.tscn" id="4_stal"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall_l"]
+size = Vector2(60, 600)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall_r"]
+size = Vector2(60, 600)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_floor_main"]
+size = Vector2(1000, 60)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pit_floor"]
+size = Vector2(160, 60)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_door_trig"]
+size = Vector2(80, 160)
+
+[node name="Level2" type="Node2D"]
+script = ExtResource("1_lvl2")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(1.2, 1.2)
+
+[node name="Background" type="ColorRect" parent="."]
+offset_left = -750.0
+offset_top = -300.0
+offset_right = 750.0
+offset_bottom = 300.0
+color = Color(1, 0.71, 0.33, 1)
+
+[node name="InnerOutline" type="ColorRect" parent="Background"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 1480.0
+offset_bottom = 580.0
+color = Color(1, 0.78, 0.45, 0.3)
+
+[node name="LeftWall" type="StaticBody2D" parent="."]
+position = Vector2(-750, 0)
+
+[node name="Visual" type="Polygon2D" parent="LeftWall"]
+color = Color(0.61, 0.35, 0, 1)
+polygon = PackedVector2Array(-30, -300, 30, -300, 30, 300, -30, 300)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall"]
+shape = SubResource("RectangleShape2D_wall_l")
+
+[node name="RightWall" type="StaticBody2D" parent="."]
+position = Vector2(750, 0)
+
+[node name="Visual" type="Polygon2D" parent="RightWall"]
+color = Color(0.61, 0.35, 0, 1)
+polygon = PackedVector2Array(-30, -300, 30, -300, 30, 300, -30, 300)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall"]
+shape = SubResource("RectangleShape2D_wall_r")
+
+[node name="Ceiling" type="StaticBody2D" parent="."]
+position = Vector2(0, -300)
+
+[node name="Visual" type="Polygon2D" parent="Ceiling"]
+color = Color(0.61, 0.35, 0, 1)
+polygon = PackedVector2Array(-750, -30, 750, -30, 750, 30, -750, 30)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ceiling"]
+shape = SubResource("RectangleShape2D_floor_main")
+
+[node name="FloorMain" type="StaticBody2D" parent="."]
+position = Vector2(-220, 260)
+
+[node name="Visual" type="Polygon2D" parent="FloorMain"]
+color = Color(0.61, 0.35, 0, 1)
+polygon = PackedVector2Array(-500, -30, 500, -30, 500, 30, -500, 30)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FloorMain"]
+shape = SubResource("RectangleShape2D_floor_main")
+
+[node name="PitFloor" type="StaticBody2D" parent="."]
+position = Vector2(460, 260)
+
+[node name="Visual" type="Polygon2D" parent="PitFloor"]
+color = Color(0.61, 0.35, 0, 1)
+polygon = PackedVector2Array(-80, -30, 80, -30, 80, 30, -80, 30)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PitFloor"]
+shape = SubResource("RectangleShape2D_pit_floor")
+
+[node name="FloorEnd" type="StaticBody2D" parent="."]
+position = Vector2(660, 260)
+
+[node name="Visual" type="Polygon2D" parent="FloorEnd"]
+color = Color(0.61, 0.35, 0, 1)
+polygon = PackedVector2Array(-60, -30, 60, -30, 60, 30, -60, 30)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FloorEnd"]
+shape = SubResource("RectangleShape2D_pit_floor")
+
+[node name="DoorTrigger" type="Area2D" parent="."]
+position = Vector2(360, 200)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DoorTrigger"]
+shape = SubResource("RectangleShape2D_door_trig")
+
+[node name="Stalactite1" parent="." instance=ExtResource("4_stal")]
+position = Vector2(-360, -260)
+
+[node name="Stalactite2" parent="." instance=ExtResource("4_stal")]
+position = Vector2(-160, -260)
+
+[node name="Stalactite3" parent="." instance=ExtResource("4_stal")]
+position = Vector2(60, -260)
+
+[node name="Stalactite4" parent="." instance=ExtResource("4_stal")]
+position = Vector2(260, -260)
+
+[node name="ExitDoor" parent="." instance=ExtResource("3_exit")]
+position = Vector2(520, 206)
+next_scene_path = "res://scenes/Level3.tscn"
+
+[node name="Player" parent="." instance=ExtResource("2_player")]
+position = Vector2(-620, 200)
+
+[node name="LevelLabel" type="Label" parent="."]
+offset_left = -710.0
+offset_top = -270.0
+offset_right = -550.0
+offset_bottom = -230.0
+theme_override_colors/font_color = Color(0.4, 0.22, 0, 1)
+theme_override_font_sizes/font_size = 28
+text = "Level 2"
+

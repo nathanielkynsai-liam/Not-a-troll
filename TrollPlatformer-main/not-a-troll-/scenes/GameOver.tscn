@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://t2aqp57cvp2i"]
+
+[ext_resource type="Script" uid="uid://cr0um6lth8d37" path="res://scripts/game_over.gd" id="1_6bcno"]
+
+[node name="GameOver" type="Control" unique_id=776564769]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6bcno")
+
+[node name="Background" type="ColorRect" parent="." unique_id=1948505397]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+color = Color(0.06666667, 0.06666667, 0.09411765, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1875855598]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=573227270]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Title" type="Label" parent="CenterContainer/VBoxContainer" unique_id=1731592770]
+layout_mode = 2
+theme_override_font_sizes/font_size = 42
+text = "Death"
+
+[node name="RetryButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1841419826]
+layout_mode = 2
+text = "Retry
+"
+
+[node name="MenuButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1532316397]
+layout_mode = 2
+text = "Main Menu"
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/RetryButton" to="." method="_on_retry_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/MenuButton" to="." method="_on_menu_button_pressed"]

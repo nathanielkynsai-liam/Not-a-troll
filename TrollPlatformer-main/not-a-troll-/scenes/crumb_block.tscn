@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/crumb_block.gd" id="1_crumb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_block"]
+size = Vector2(32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_trig"]
+size = Vector2(30, 8)
+
+[node name="CrumbBlock" type="StaticBody2D"]
+script = ExtResource("1_crumb")
+
+[node name="Visual" type="Polygon2D" parent="."]
+color = Color(0.68, 0.42, 0.2, 1)
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[node name="CrackVisual" type="Polygon2D" parent="Visual"]
+color = Color(0.35, 0.2, 0.08, 1)
+polygon = PackedVector2Array(-10, -16, -4, -6, 2, -12, 6, -2, 2, 8, 8, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_block")
+
+[node name="TriggerArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerArea"]
+position = Vector2(0, -18)
+shape = SubResource("RectangleShape2D_trig")
+

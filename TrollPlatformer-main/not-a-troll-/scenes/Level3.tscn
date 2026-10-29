@@ -1,0 +1,158 @@
+[gd_scene format=3 uid="uid://dilfo63h01ycx"]
+
+[ext_resource type="Script" uid="uid://bj53mod6cmbbe" path="res://scripts/level_3.gd" id="1_lvl3"]
+[ext_resource type="PackedScene" uid="uid://jvrg8pf6t5rd" path="res://scenes/player.tscn" id="2_player"]
+[ext_resource type="PackedScene" path="res://scenes/crumb_block.tscn" id="3_crumb"]
+[ext_resource type="PackedScene" path="res://scenes/crusher.tscn" id="4_crush"]
+[ext_resource type="PackedScene" path="res://scenes/spikes.tscn" id="5_spikes"]
+[ext_resource type="PackedScene" path="res://scenes/fake_door.tscn" id="6_fakedoor"]
+[ext_resource type="PackedScene" path="res://scenes/exit_door.tscn" id="7_exit"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall_l"]
+size = Vector2(60, 600)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall_r"]
+size = Vector2(60, 600)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_floor_start"]
+size = Vector2(300, 60)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_floor_end"]
+size = Vector2(240, 60)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_high_ledge"]
+size = Vector2(160, 30)
+
+[node name="Level3" type="Node2D" unique_id=613173005]
+script = ExtResource("1_lvl3")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=727983023]
+zoom = Vector2(1.2, 1.2)
+
+[node name="Background" type="ColorRect" parent="." unique_id=972381704]
+offset_left = -750.0
+offset_top = -300.0
+offset_right = 750.0
+offset_bottom = 300.0
+color = Color(1, 0.71, 0.33, 1)
+
+[node name="InnerOutline" type="ColorRect" parent="Background" unique_id=371695421]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 1480.0
+offset_bottom = 580.0
+color = Color(1, 0.78, 0.45, 0.3)
+
+[node name="LeftWall" type="StaticBody2D" parent="." unique_id=125785402]
+position = Vector2(-750, 0)
+
+[node name="Visual" type="Polygon2D" parent="LeftWall" unique_id=306938117]
+color = Color(0.61, 0.35, 0, 1)
+polygon = PackedVector2Array(-30, -300, 30, -300, 30, 300, -30, 300)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall" unique_id=1142780641]
+shape = SubResource("RectangleShape2D_wall_l")
+
+[node name="RightWall" type="StaticBody2D" parent="." unique_id=526766181]
+position = Vector2(750, 0)
+
+[node name="Visual" type="Polygon2D" parent="RightWall" unique_id=1601823320]
+color = Color(0.61, 0.35, 0, 1)
+polygon = PackedVector2Array(-30, -300, 30, -300, 30, 300, -30, 300)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall" unique_id=1815194874]
+shape = SubResource("RectangleShape2D_wall_r")
+
+[node name="Ceiling" type="StaticBody2D" parent="." unique_id=1428859977]
+position = Vector2(0, -300)
+
+[node name="Visual" type="Polygon2D" parent="Ceiling" unique_id=1319566860]
+color = Color(0.61, 0.35, 0, 1)
+polygon = PackedVector2Array(-750, -30, 750, -30, 750, 30, -750, 30)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ceiling" unique_id=608566967]
+shape = SubResource("RectangleShape2D_floor_start")
+
+[node name="FloorStart" type="StaticBody2D" parent="." unique_id=882115126]
+position = Vector2(-550, 260)
+
+[node name="Visual" type="Polygon2D" parent="FloorStart" unique_id=190181523]
+color = Color(0.61, 0.35, 0, 1)
+polygon = PackedVector2Array(-150, -30, 150, -30, 150, 30, -150, 30)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FloorStart" unique_id=1110094759]
+shape = SubResource("RectangleShape2D_floor_start")
+
+[node name="FloorEnd" type="StaticBody2D" parent="." unique_id=719127340]
+position = Vector2(580, 260)
+
+[node name="Visual" type="Polygon2D" parent="FloorEnd" unique_id=503020070]
+color = Color(0.61, 0.35, 0, 1)
+polygon = PackedVector2Array(-120, -30, 120, -30, 120, 30, -120, 30)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FloorEnd" unique_id=1662580868]
+shape = SubResource("RectangleShape2D_floor_end")
+
+[node name="HighLedge" type="StaticBody2D" parent="." unique_id=263270362]
+position = Vector2(650, 130)
+
+[node name="Visual" type="Polygon2D" parent="HighLedge" unique_id=1328075388]
+position = Vector2(0, 26)
+color = Color(0.61, 0.35, 0, 1)
+polygon = PackedVector2Array(-80, -15, -31, -15, 10, -21, 80, -15, 80, 15, -80, 15)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HighLedge" unique_id=842311203]
+position = Vector2(-4, 39)
+shape = SubResource("RectangleShape2D_high_ledge")
+
+[node name="CrumbBlock1" parent="." unique_id=1339470754 instance=ExtResource("3_crumb")]
+position = Vector2(-280, 260)
+
+[node name="CrumbBlock2" parent="." unique_id=2065781141 instance=ExtResource("3_crumb")]
+position = Vector2(-140, 260)
+
+[node name="CrumbBlock3" parent="." unique_id=201864498 instance=ExtResource("3_crumb")]
+position = Vector2(0, 260)
+
+[node name="CrumbBlock4" parent="." unique_id=80018689 instance=ExtResource("3_crumb")]
+position = Vector2(140, 260)
+
+[node name="CrumbBlock5" parent="." unique_id=1220763946 instance=ExtResource("3_crumb")]
+position = Vector2(280, 260)
+
+[node name="Crusher" parent="." unique_id=1311066738 instance=ExtResource("4_crush")]
+position = Vector2(0, -250)
+slam_distance = 420.0
+detection_range = 450.0
+
+[node name="Spikes1" parent="." unique_id=578815903 instance=ExtResource("5_spikes")]
+position = Vector2(-200, 380)
+
+[node name="Spikes2" parent="." unique_id=1875968528 instance=ExtResource("5_spikes")]
+position = Vector2(-70, 380)
+
+[node name="Spikes3" parent="." unique_id=1979792843 instance=ExtResource("5_spikes")]
+position = Vector2(60, 380)
+
+[node name="Spikes4" parent="." unique_id=1193323185 instance=ExtResource("5_spikes")]
+position = Vector2(190, 380)
+
+[node name="FakeDoor" parent="." unique_id=2113839606 instance=ExtResource("6_fakedoor")]
+position = Vector2(510, 206)
+
+[node name="ExitDoor" parent="." unique_id=329364043 instance=ExtResource("7_exit")]
+position = Vector2(650, 76)
+next_scene_path = "res://scenes/Level4.tscn"
+
+[node name="Player" parent="." unique_id=1636272871 instance=ExtResource("2_player")]
+position = Vector2(-620, 200)
+
+[node name="LevelLabel" type="Label" parent="." unique_id=77823471]
+offset_left = -710.0
+offset_top = -270.0
+offset_right = -550.0
+offset_bottom = -230.0
+theme_override_colors/font_color = Color(0.4, 0.22, 0, 1)
+theme_override_font_sizes/font_size = 28
+text = "Level 3"

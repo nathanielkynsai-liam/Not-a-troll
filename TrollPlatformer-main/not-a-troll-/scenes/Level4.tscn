@@ -1,0 +1,168 @@
+[gd_scene load_steps=12 format=3]
+
+[ext_resource type="Script" path="res://scripts/level_4.gd" id="1_lvl4"]
+[ext_resource type="PackedScene" path="res://scenes/player.tscn" id="2_player"]
+[ext_resource type="PackedScene" path="res://scenes/spring_launcher.tscn" id="3_spring"]
+[ext_resource type="PackedScene" path="res://scenes/spikes.tscn" id="4_spikes"]
+[ext_resource type="PackedScene" path="res://scenes/exit_door.tscn" id="5_exit"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall_l"]
+size = Vector2(60, 600)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall_r"]
+size = Vector2(60, 600)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_divider"]
+size = Vector2(40, 360)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_floor_l"]
+size = Vector2(500, 60)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_floor_r"]
+size = Vector2(400, 60)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ledge"]
+size = Vector2(160, 60)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_trig"]
+size = Vector2(80, 160)
+
+[node name="Level4" type="Node2D"]
+script = ExtResource("1_lvl4")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(1.2, 1.2)
+
+[node name="Background" type="ColorRect" parent="."]
+offset_left = -750.0
+offset_top = -300.0
+offset_right = 750.0
+offset_bottom = 300.0
+color = Color(1, 0.71, 0.33, 1)
+
+[node name="InnerOutline" type="ColorRect" parent="Background"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 1480.0
+offset_bottom = 580.0
+color = Color(1, 0.78, 0.45, 0.3)
+
+[node name="LeftWall" type="StaticBody2D" parent="."]
+position = Vector2(-750, 0)
+
+[node name="Visual" type="Polygon2D" parent="LeftWall"]
+color = Color(0.61, 0.35, 0, 1)
+polygon = PackedVector2Array(-30, -300, 30, -300, 30, 300, -30, 300)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall"]
+shape = SubResource("RectangleShape2D_wall_l")
+
+[node name="RightWall" type="StaticBody2D" parent="."]
+position = Vector2(750, 0)
+
+[node name="Visual" type="Polygon2D" parent="RightWall"]
+color = Color(0.61, 0.35, 0, 1)
+polygon = PackedVector2Array(-30, -300, 30, -300, 30, 300, -30, 300)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall"]
+shape = SubResource("RectangleShape2D_wall_r")
+
+[node name="Ceiling" type="StaticBody2D" parent="."]
+position = Vector2(0, -300)
+
+[node name="Visual" type="Polygon2D" parent="Ceiling"]
+color = Color(0.61, 0.35, 0, 1)
+polygon = PackedVector2Array(-750, -30, 750, -30, 750, 30, -750, 30)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ceiling"]
+shape = SubResource("RectangleShape2D_floor_l")
+
+[node name="DividerWall" type="StaticBody2D" parent="."]
+position = Vector2(-150, 80)
+
+[node name="Visual" type="Polygon2D" parent="DividerWall"]
+color = Color(0.61, 0.35, 0, 1)
+polygon = PackedVector2Array(-20, -180, 20, -180, 20, 180, -20, 180)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DividerWall"]
+shape = SubResource("RectangleShape2D_divider")
+
+[node name="FloorLeft" type="StaticBody2D" parent="."]
+position = Vector2(-480, 260)
+
+[node name="Visual" type="Polygon2D" parent="FloorLeft"]
+color = Color(0.61, 0.35, 0, 1)
+polygon = PackedVector2Array(-250, -30, 250, -30, 250, 30, -250, 30)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FloorLeft"]
+shape = SubResource("RectangleShape2D_floor_l")
+
+[node name="FloorMid" type="StaticBody2D" parent="."]
+position = Vector2(150, 260)
+
+[node name="Visual" type="Polygon2D" parent="FloorMid"]
+color = Color(0.61, 0.35, 0, 1)
+polygon = PackedVector2Array(-200, -30, 200, -30, 200, 30, -200, 30)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FloorMid"]
+shape = SubResource("RectangleShape2D_floor_r")
+
+[node name="DroppingLedge" type="StaticBody2D" parent="."]
+position = Vector2(580, 260)
+
+[node name="Visual" type="Polygon2D" parent="DroppingLedge"]
+color = Color(0.61, 0.35, 0, 1)
+polygon = PackedVector2Array(-80, -30, 80, -30, 80, 30, -80, 30)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DroppingLedge"]
+shape = SubResource("RectangleShape2D_ledge")
+
+[node name="SpringLauncher" parent="." instance=ExtResource("3_spring")]
+position = Vector2(-260, 222)
+launch_force = 820.0
+
+[node name="CeilingSpikes" parent="." instance=ExtResource("4_spikes")]
+position = Vector2(-260, -255)
+direction = 1
+
+[node name="SpikeTrigger" type="Area2D" parent="."]
+position = Vector2(-20, 200)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpikeTrigger"]
+shape = SubResource("RectangleShape2D_trig")
+
+[node name="SlidingSpikes" type="Node2D" parent="."]
+position = Vector2(300, 220)
+
+[node name="Spike1" parent="SlidingSpikes" instance=ExtResource("4_spikes")]
+position = Vector2(-40, 0)
+
+[node name="Spike2" parent="SlidingSpikes" instance=ExtResource("4_spikes")]
+position = Vector2(0, 0)
+
+[node name="Spike3" parent="SlidingSpikes" instance=ExtResource("4_spikes")]
+position = Vector2(40, 0)
+
+[node name="LedgeTrigger" type="Area2D" parent="."]
+position = Vector2(480, 200)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LedgeTrigger"]
+shape = SubResource("RectangleShape2D_trig")
+
+[node name="ExitDoor" parent="." instance=ExtResource("5_exit")]
+position = Vector2(620, 206)
+next_scene_path = "res://scenes/VictoryScreen.tscn"
+
+[node name="Player" parent="." instance=ExtResource("2_player")]
+position = Vector2(-620, 200)
+
+[node name="LevelLabel" type="Label" parent="."]
+offset_left = -710.0
+offset_top = -270.0
+offset_right = -550.0
+offset_bottom = -230.0
+theme_override_colors/font_color = Color(0.4, 0.22, 0, 1)
+theme_override_font_sizes/font_size = 28
+text = "Level 4"
+

@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://dhy8bq74ucb0k"]
+
+[ext_resource type="Script" uid="uid://dxkr4fevthaac" path="res://scripts/surprise_spikes.gd" id="1_ao8o3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jcvkx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_46yf8"]
+
+[node name="SurpriseSpikes" type="Node2D" unique_id=1558483648]
+script = ExtResource("1_ao8o3")
+
+[node name="Visual" type="Polygon2D" parent="." unique_id=1383867196]
+color = Color(1, 0.2, 0.30980393, 1)
+polygon = PackedVector2Array(-15, 15, 0, -15, 15, 15)
+uv = PackedVector2Array(288.5, -54.5, 240, 39.5)
+
+[node name="Hazard" type="Area2D" parent="." unique_id=599754334]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hazard" unique_id=165226776]
+shape = SubResource("RectangleShape2D_jcvkx")
+
+[node name="Trigger" type="Area2D" parent="." unique_id=1027263647]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Trigger" unique_id=1702939050]
+position = Vector2(-43, -2)
+shape = SubResource("RectangleShape2D_46yf8")

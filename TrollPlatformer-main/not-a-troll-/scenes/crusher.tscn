@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/crusher.gd" id="1_crusher"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_piston"]
+size = Vector2(32, 28)
+
+[node name="Crusher" type="Node2D"]
+script = ExtResource("1_crusher")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(0, 200)
+
+[node name="PistonHead" type="Area2D" parent="."]
+
+[node name="BaseBlock" type="Polygon2D" parent="PistonHead"]
+color = Color(0.4, 0.42, 0.48, 1)
+polygon = PackedVector2Array(-16, -14, 16, -14, 16, 4, -16, 4)
+
+[node name="Spikes" type="Polygon2D" parent="PistonHead"]
+color = Color(0.8, 0.2, 0.25, 1)
+polygon = PackedVector2Array(-16, 4, -10, 14, -5, 4, 0, 14, 5, 4, 10, 14, 16, 4)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PistonHead"]
+shape = SubResource("RectangleShape2D_piston")
+
